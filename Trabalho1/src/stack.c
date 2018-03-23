@@ -17,23 +17,20 @@
         return stack;
     }
     
-    void push(t_stack *stack, void *dado){
+    void push(t_stack *stack, void *dado, int tipoDado){
         t_stackElement *elemento = (t_stackElement*) malloc(sizeof(t_stackElement));
-        elemento->dado = dado;
+        switch(tipoDado){
+            case t_int:
+                int *inserir = (int*) malloc(sizeof(int));
+                break;
+            case t_char):
+                char *inserir = (char*) malloc(sizeof(char));
+                break;
+        }
+        *inserir=*dado;
+        elemento->dado = inserir;
         elemento->proximo = stack->inicio;
         stack->inicio = elemento;
-    }
-    
-    void pushInt(t_stack *stack, int dado){
-        int *inserir = (int*) malloc(sizeof(int));
-        *inserir=dado;
-        push(stack, inserir);
-    }
-    
-    void pushChar(t_stack *stack, char dado){
-        char *inserir = (char*) malloc(sizeof(char));
-        *inserir=dado;
-        push(stack, inserir);
     }
     
     void *pop(t_stack *stack){

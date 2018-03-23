@@ -24,9 +24,7 @@
     
     /* declaracao de prototipos de funcoes */
     extern t_stack *newStack();
-    extern void push(t_stack *stack, void *dado);
-    extern void pushInt(t_stack *stack, int dado);
-    extern void pushChar(t_stack *stack, char dado);
+    extern void push(t_stack *stack, void *dado, int tipoDado);
     extern void *pop(t_stack *stack);
     extern void printStack(t_stack *stack, int tipoDado);       
 
