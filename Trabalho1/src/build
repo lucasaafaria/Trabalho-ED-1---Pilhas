@@ -1,0 +1,2 @@
+gcc -o stack.o -c stack.c
+gcc stack.o $1
