@@ -1,1 +1,1 @@
-# Trabalho-ED-1---Pilhas
+Esse repositório foi criado com o intuito de controlar o desenvolvimento dos trabalhos práticos da disciplina Estruturas de Dados da Universidade de Brasília, ministrada pelo professor Eduardo Alchieri. Autores: Lucas de Almeida Abreu Faria e Mateus Berardo de Souza Terra.
