@@ -30,6 +30,7 @@
         *inserir=*dado;
         elemento->dado = inserir;
         elemento->proximo = stack->inicio;
+        elemento->tipoDado = tipoDado;
         stack->inicio = elemento;
     }
     

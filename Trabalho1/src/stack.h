@@ -17,6 +17,7 @@
     typedef struct elemento{
         void *dado;
         struct elemento *proximo;
+        int tipoDado;
     } t_stackElement;
     typedef struct stack{
         t_stackElement *inicio;
