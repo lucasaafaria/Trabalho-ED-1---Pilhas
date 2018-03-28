@@ -44,28 +44,28 @@
 				number += (number * 10) + (item - '0');
 				scanf("%c", &item);
 				if(!isNumber(&item)){
-					pushQueue(queue, &number, t_int);
+					add(queue, &number, t_int);
 					number = 0;
 				}
 			}
 			if(item != ' ' && item != '\n')
-				pushQueue(queue, &item, t_char);
+				add(queue, &item, t_char);
 		}
 	}
 
 	int validExpression(t_queue * queue){
-		char * element;
+		char element;
 		t_stack * stack = newStack();
 		t_queueElement * current = queue->inicio;
 
 		while(current != NULL){
 			if(isParenthesis((char *)current->dado) == OPEN_PAR){
-				element = (char *) current->dado;
-				pushStack(element, stack, t_char);
+				element = *(char *) current->dado;
+				push(stack, &element, t_char);
 			}else if(isParenthesis((char *)current->dado) == CLOSE_PAR){
 				if(emptyStack(stack)) /* If true, there aren't any '(' in the stack. */
 					return 0;	
-				element = (char *) popStack(stack);	
+				element = popChar(stack);	
 			}else if(!isOperator((char *)current->dado) && !isNumber((char *)current->dado))
 				return 0;
 			current = current->proximo;

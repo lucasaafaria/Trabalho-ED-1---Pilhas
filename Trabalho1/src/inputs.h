@@ -1,6 +1,9 @@
 #ifndef _INPUTS_H_
 #define _INPUTS_H_
 
+    #include "stack.h"
+    #include "queue.h"
+
 	/* Definição de constantes para '(' e ')' */
 	#define OPEN_PAR	1
 	#define CLOSE_PAR	2

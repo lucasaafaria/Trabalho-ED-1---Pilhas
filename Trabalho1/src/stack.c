@@ -19,46 +19,54 @@
     
     void push(t_stack *stack, void *dado, int tipoDado){
         t_stackElement *elemento = (t_stackElement*) malloc(sizeof(t_stackElement));
+        void *inserir;
         switch(tipoDado){
             case t_int:
-                int *inserir = (int*) malloc(sizeof(int));
+                inserir = (int*) malloc(sizeof(int));
+                *(int*)inserir=*(int*)dado;
                 break;
-            case t_char):
-                char *inserir = (char*) malloc(sizeof(char));
+            case t_char:
+                inserir = (char*) malloc(sizeof(char));
+                *(char*)inserir=*(char*)dado;
                 break;
         }
-        *inserir=*dado;
         elemento->dado = inserir;
         elemento->proximo = stack->inicio;
         elemento->tipoDado = tipoDado;
         stack->inicio = elemento;
     }
     
-    void *pop(t_stack *stack){
-        void *dado = NULL;
+    int popInt(t_stack *stack){
+        int dado=-1;
         t_stackElement *remover = stack->inicio;
         if(remover == NULL){
             return dado;
         }
-        dado = remover->dado;
+        dado = *(int*)remover->dado;
         stack->inicio = remover->proximo;
         free(remover->dado);
         free(remover);
         return dado;
-    }  
+    } 
     
-    void printStack(t_stack *stack, int tipoDado){
-        t_stackElement *atual = stack->inicio;
-        while(atual != NULL){
-            switch(tipoDado){
-                case t_int:
-                    printf("%d\n", *((int*)atual->dado));
-                    break;
-                case t_char:
-                    printf("%c\n", *((char*)atual->dado));
-                    break;
-            }
-            atual=atual->proximo;
+    char popChar(t_stack *stack){
+        char dado=0;
+        t_stackElement *remover = stack->inicio;
+        if(remover == NULL){
+            return dado;
         }
-        printf("FIM DA PILHA\n");
-    }   
+        dado = *(char*)remover->dado;
+        stack->inicio = remover->proximo;
+        free(remover->dado);
+        free(remover);
+        return dado;
+    } 
+    
+    int emptyStack(t_stack *stack){
+        if(stack->inicio == NULL){
+            return 1;
+        } 
+        return 0;
+    }
+    
+      
