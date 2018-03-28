@@ -54,9 +54,13 @@
 	}
 
 	int validExpression(t_queue * queue){
+	    /* Nao percorrer a fila, retirar os elementos pra interpretar */
 		char element;
 		t_stack * stack = newStack();
 		t_queueElement * current = queue->inicio;
+		/* sugestao
+		t_queueElement * current = removeQElement(queue);
+		*/
 
 		while(current != NULL){
 			if(isParenthesis((char *)current->dado) == OPEN_PAR){
@@ -68,6 +72,10 @@
 				element = popChar(stack);	
 			}else if(!isOperator((char *)current->dado) && !isNumber((char *)current->dado))
 				return 0;
+			/* sugestao
+			free(current);
+			current = removeQElement(queue);
+			*/
 			current = current->proximo;
 		}
 

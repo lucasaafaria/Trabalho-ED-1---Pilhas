@@ -1,4 +1,4 @@
-gcc -o stack.o -c stack.c
-gcc -o queue.o -c queue.c
-gcc queue.o stack.o -o inputs.o -c inputs.c
-gcc stack.o inputs.o queue.o $1
+gcc -o lib/stack.o -c stack.c
+gcc -o lib/queue.o -c queue.c
+gcc lib/queue.o lib/stack.o -o lib/inputs.o -c inputs.c
+gcc lib/stack.o lib/inputs.o lib/queue.o $1
