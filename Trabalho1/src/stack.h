@@ -8,19 +8,13 @@
 
 #ifndef _STACK_H_
 #define _STACK_H_
-    
-    /* definicao de constantes */
-    #define t_int 1
-    #define t_char 2
+
+    #include <stdlib.h>
+    #include "list.h"
     
     /* definicao de tipos */
-    typedef struct elemento{
-        void *dado;
-        struct elemento *proximo;
-        int tipoDado;
-    } t_stackElement;
     typedef struct stack{
-        t_stackElement *inicio;
+        t_list *l;
     } t_stack;
     
     /* declaracao de prototipos de funcoes */
@@ -28,6 +22,8 @@
     extern void push(t_stack *stack, void *dado, int tipoDado);
     extern int popInt(t_stack *stack);
     extern char popChar(t_stack *stack);
-    extern int emptyStack(t_stack *stack);       
-
+    extern double popDouble(t_stack *stack);
+    extern int isStackEmpty(t_stack *stack);
+    extern int getNextStackType(t_stack *stack);
+    
 #endif

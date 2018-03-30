@@ -6,12 +6,9 @@
 *     @professor: Eduardo Alchieri
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+
 #include "inputs.h"
-#include "stack.h"
-#include "queue.h"
+
 
 /* Funções de comparação */
 	int isParenthesis(char * dado){
@@ -57,9 +54,9 @@
 	    /* Nao percorrer a fila, retirar os elementos pra interpretar */
 		char element;
 		t_stack * stack = newStack();
-		t_queueElement * current = queue->inicio;
-		/* sugestao
-		t_queueElement * current = removeQElement(queue);
+		t_element * current = queue->l->inicio;
+		/* sugestao. ainda vou criar essa funcao
+		t_element * current = removeQElement(queue);
 		*/
 
 		while(current != NULL){
@@ -67,7 +64,7 @@
 				element = *(char *) current->dado;
 				push(stack, &element, t_char);
 			}else if(isParenthesis((char *)current->dado) == CLOSE_PAR){
-				if(emptyStack(stack)) /* If true, there aren't any '(' in the stack. */
+				if(isStackEmpty(stack)) /* If true, there aren't any '(' in the stack. */
 					return 0;	
 				element = popChar(stack);	
 			}else if(!isOperator((char *)current->dado) && !isNumber((char *)current->dado))
@@ -79,7 +76,7 @@
 			current = current->proximo;
 		}
 
-		if(!emptyStack(stack)) /* If true, there are still '(' in the stack. More '(' than ')' */
+		if(!isStackEmpty(stack)) /* If true, there are still '(' in the stack. More '(' than ')' */
 			return 0;
 		return 1;
 	}

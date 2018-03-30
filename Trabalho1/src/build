@@ -1,4 +1,6 @@
+gcc -o lib/list.o -c list.c
 gcc -o lib/stack.o -c stack.c
 gcc -o lib/queue.o -c queue.c
-gcc lib/queue.o lib/stack.o -o lib/inputs.o -c inputs.c
-gcc lib/stack.o lib/inputs.o lib/queue.o $1
+gcc -o lib/inputs.o -c inputs.c
+gcc -o lib/calculate.o -c calculate.c
+gcc lib/list.o lib/stack.o lib/queue.o lib/inputs.o lib/calculate.o $1
