@@ -20,8 +20,8 @@
     /* definicao de tipos */
     typedef struct elemento{
         void *dado;
-        struct elemento *proximo;
         int tipoDado;
+        struct elemento *proximo;
     } t_element;
     typedef struct list{
         t_element *inicio;
