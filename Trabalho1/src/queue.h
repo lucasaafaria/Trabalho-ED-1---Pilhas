@@ -9,9 +9,7 @@
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
 
-    #include <stdlib.h>
-    #include <stdio.h>
-    #include "list.h"
+    #include "stack.h"
     
     /* definicao de constantes */
     #define t_int 1

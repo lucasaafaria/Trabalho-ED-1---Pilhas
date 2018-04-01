@@ -1,5 +1,5 @@
 /*------------------------- Trabalho 1 - Pilhas -------------------------
-* Implementação das funções de entrada de dados, validação e transformação em pós-fixo
+*       Implementação da entrada de dados e validação
 *		@autores: Lucas de Almeida Abreu Faria, Mateus Berardo de Souza Terra
 *	 @matriculas: 17/0016668 ; 17/0018806
 *    @disciplina: Estruturas de Dados
@@ -9,8 +9,7 @@
 
 #include "inputs.h"
 
-
-/* Funções de comparação */
+	/* Funções de comparação */
 	int isParenthesis(char * dado){
 		if((*dado) == '(')
 			return OPEN_PAR;
@@ -31,52 +30,86 @@
 		return 0;
 	}
 
+	/* Recebe a entrada de dados do programa */
 	void getExpression(t_queue * queue){
-		char item = '\0';
-		int number = 0;
+		char dado = '\0';
+		double number = 0.0;
 
-		while(item != '\n'){
-			scanf("%c", &item);
-			while(isNumber(&item)){
-				number += (number * 10) + (item - '0');
-				scanf("%c", &item);
-				if(!isNumber(&item)){
-					add(queue, &number, t_int);
-					number = 0;
+		while(dado != '\n'){
+			scanf("%c", &dado);
+			while(isNumber(&dado)){	/* Algoritmo para lidar com números de mais de 1 algarismo */
+				number = (number * 10.0) + (dado - '0');
+				scanf("%c", &dado);
+				if(!isNumber(&dado)){
+					add(queue, &number, t_double);
+					number = 0.0;
 				}
 			}
-			if(item != ' ' && item != '\n')
-				add(queue, &item, t_char);
+			if(dado != ' ' && dado != '\n') /* Ignora espaços vazios */
+				add(queue, &dado, t_char);
 		}
 	}
 
-	int validExpression(t_queue * queue){
-	    /* Nao percorrer a fila, retirar os elementos pra interpretar */
-		char element;
-		t_stack * stack = newStack();
-		t_element * current = queue->l->inicio;
-		/* sugestao. ainda vou criar essa funcao
-		t_element * current = removeQElement(queue);
-		*/
+	/* Testes para validação da entrada */
+	int okTestsDouble(int lastType, char lastChar){
+		if(lastType == t_double || (lastChar == ')' && lastType == t_char))
+			return 0;
+		return 1;
+	}
 
-		while(current != NULL){
-			if(isParenthesis((char *)current->dado) == OPEN_PAR){
-				element = *(char *) current->dado;
-				push(stack, &element, t_char);
-			}else if(isParenthesis((char *)current->dado) == CLOSE_PAR){
-				if(isStackEmpty(stack)) /* If true, there aren't any '(' in the stack. */
-					return 0;	
-				element = popChar(stack);	
-			}else if(!isOperator((char *)current->dado) && !isNumber((char *)current->dado))
-				return 0;
-			/* sugestao
-			free(current);
-			current = removeQElement(queue);
-			*/
-			current = current->proximo;
+	int okTestsChar(char dado, int lastType, char lastChar){
+		if(!isOperator(&dado) && !isParenthesis(&dado))
+			return 0;
+		switch(dado){
+			case '(':
+				if(lastType == t_double || (lastChar == ')' && lastType == t_char))
+					return 0;
+				break;
+			case ')':
+				if(isOperator(&lastChar) && lastType == t_char)
+					return 0;
+				break;
+			default:
+				if(lastType == -1 || (lastChar == '(' && lastType == t_char) || (isOperator(&lastChar) && lastType == t_char))
+					return 0;
+				break;
 		}
+		return 1;
+	}
 
-		if(!isStackEmpty(stack)) /* If true, there are still '(' in the stack. More '(' than ')' */
+	int validExpression(t_queue * queue){
+		t_stack * stack = newStack();
+		char lastChar = '\0', dadoChar;
+		int tipoDado, lastType = -1;
+		double dadoDouble;
+
+		while(!isEmptyQueue(queue)){
+			tipoDado = getNextQueueType(queue);
+			switch(tipoDado){
+				case t_double:
+					dadoDouble = removeDouble(queue);
+					if(!okTestsDouble(lastType, lastChar))
+						return 0;
+					lastType = t_double;
+					break;
+				case t_char:
+					dadoChar = removeChar(queue);
+					if(!okTestsChar(dadoChar, lastType, lastChar))
+						return 0;
+					if(dadoChar == '(')
+						push(stack, &dadoChar, t_char);
+					else if(dadoChar == ')'){
+						if(isStackEmpty(stack))
+							return 0;
+						if(popChar(stack) != '(')
+							return 0; 
+					}
+					lastType = t_char;
+					lastChar = dadoChar;
+					break;
+			}
+		}
+		if(!isStackEmpty(stack))
 			return 0;
 		return 1;
 	}
