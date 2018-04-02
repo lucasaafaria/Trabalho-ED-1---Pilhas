@@ -12,8 +12,6 @@
     #include "stack.h"
     #include "queue.h"
     
-    /* definicao de constantes */
-    
     /* declaracao de prototipos de funcoes */
     extern double calculate(t_queue *queue);
     

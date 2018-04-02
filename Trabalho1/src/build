@@ -4,4 +4,4 @@ gcc -o lib/queue.o -c queue.c
 gcc -o lib/inputs.o -c inputs.c
 gcc -o lib/transform.o -c transform.c
 gcc -o lib/calculate.o -c calculate.c
-gcc lib/list.o lib/stack.o lib/queue.o lib/inputs.o lib/transform.o lib/calculate.o $1
+gcc lib/* $1

@@ -20,32 +20,23 @@ double calculate(t_queue *queue){
             push(stack, &dado, t_double);
         } else {
             char operacao = removeChar(queue);
+            op1 = popDouble(stack);
+            op2 = popDouble(stack);
             switch (operacao){
                 case '*':
-                    op1 = popDouble(stack);
-                    op2 = popDouble(stack);
                     resultado = op2*op1;
-                    push(stack, &resultado, t_double);
                     break;
                 case '/':
-                    op1 = popDouble(stack);
-                    op2 = popDouble(stack);
                     resultado = op2/op1;
-                    push(stack, &resultado, t_double);
                     break;
                 case '+':
-                    op1 = popDouble(stack);
-                    op2 = popDouble(stack);
                     resultado = op2+op1;
-                    push(stack, &resultado, t_double);
                     break;
                 case '-':
-                    op1 = popDouble(stack);
-                    op2 = popDouble(stack);
                     resultado = op2-op1;
-                    push(stack, &resultado, t_double);
                     break;
             }
+            push(stack, &resultado, t_double);
         }
     }
     return popDouble(stack);

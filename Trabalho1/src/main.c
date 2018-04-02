@@ -6,7 +6,17 @@
 */
 
 #include <stdio.h>
+#include "queue.h"
+#include "calculate.h"
+#include "inputs.h"
+#include "transform.h"
+
 
 int main(){
+    t_queue * queue = newQueue();
+	getExpression(queue);
+	// validar
+	t_queue * saida = transform(queue);
+	printf("%lf\n", calculate(saida));
     return 0;
 }
