@@ -19,8 +19,8 @@ int main(){
 	if(!validExpression(queue, validada)){
 		printf("Expressão inválida\n");
 	}else{
-		t_queue * saida = transform(validada);
-		printf("%lf\n", calculate(saida));
+		free(queue);
+		printf("%lf\n", calculate(transform(validada)));
 	}
 	return 0;
 }
