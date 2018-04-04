@@ -14,9 +14,13 @@
 
 int main(){
     t_queue * queue = newQueue();
+    t_queue * validada = newQueue();
 	getExpression(queue);
-	// validar
-	t_queue * saida = transform(queue);
-	printf("%lf\n", calculate(saida));
-    return 0;
+	if(!validExpression(queue, validada)){
+		printf("Expressão inválida\n");
+	}else{
+		t_queue * saida = transform(validada);
+		printf("%lf\n", calculate(saida));
+	}
+	return 0;
 }

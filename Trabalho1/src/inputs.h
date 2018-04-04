@@ -25,6 +25,6 @@
 	extern void getExpression(t_queue * queue);
 	extern int okTestsDouble(int lastType, char lastChar);
 	extern int okTestsChar(char dado, int lastType, char lastChar);
-	extern int validExpression(t_queue * queue);
+	extern int validExpression(t_queue * queue, t_queue * validada);
 
 #endif

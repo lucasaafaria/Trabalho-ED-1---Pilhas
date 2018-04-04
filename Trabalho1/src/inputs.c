@@ -77,10 +77,10 @@
 		return 1;
 	}
 
-	int validExpression(t_queue * queue){
+	int validExpression(t_queue * queue, t_queue * validada){
 		t_stack * stack = newStack();
 		char lastChar = '\0', dadoChar;
-		int tipoDado, lastType = -1;
+		int tipoDado, lastType = -1, opCount = 0, doubleCount = 0;
 		double dadoDouble;
 
 		while(!isEmptyQueue(queue)){
@@ -90,7 +90,9 @@
 					dadoDouble = removeDouble(queue);
 					if(!okTestsDouble(lastType, lastChar))
 						return 0;
+					doubleCount++;
 					lastType = t_double;
+					add(validada, &dadoDouble, t_double);
 					break;
 				case t_char:
 					dadoChar = removeChar(queue);
@@ -104,11 +106,16 @@
 						if(popChar(stack) != '(')
 							return 0; 
 					}
+					if(isOperator(&dadoChar))
+						opCount++;
 					lastType = t_char;
 					lastChar = dadoChar;
+					add(validada, &dadoChar, t_char);
 					break;
 			}
 		}
+		if(opCount >= doubleCount)
+			return 0;
 		if(!isStackEmpty(stack))
 			return 0;
 		return 1;
