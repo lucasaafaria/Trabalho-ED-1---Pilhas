@@ -18,6 +18,7 @@
     #define t_double 3
     
     /* definicao de tipos */
+
     typedef struct elemento{
         void *dado;
         int tipoDado;
