@@ -18,10 +18,6 @@ void push(t_stack *stack, void *dado, int tipoDado){
     addStart(stack->l, dado, tipoDado);
 }
 
-int popInt(t_stack *stack){
-    return removeFirstInt(stack->l);
-} 
-
 char popChar(t_stack *stack){
     return removeFirstChar(stack->l);
 }

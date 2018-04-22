@@ -11,10 +11,6 @@
 
     #include "stack.h"
     
-    /* definicao de constantes */
-    #define t_int 1
-    #define t_char 2
-    
     /* definicao de tipos */
     typedef struct queue{
         t_list *l;
@@ -23,7 +19,6 @@
     /* declaracao de prototipos de funcoes */
     extern t_queue *newQueue();
     extern void add(t_queue *queue, void *dado, int tipoDado);
-    extern int removeInt(t_queue *queue);
     extern char removeChar(t_queue *queue);
     extern double removeDouble(t_queue *queue);
     extern int isEmptyQueue(t_queue *queue);

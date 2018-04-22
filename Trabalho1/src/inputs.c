@@ -130,7 +130,7 @@
 				add(validada, &dadoChar, t_char);
 			}
 		}
-		if(opCount >= doubleCount)
+		if(opCount >= doubleCount) /* para evitar validar expressões que terminem com operador */
 			return 0;
 		if(!isStackEmpty(stack))
 			return 0;

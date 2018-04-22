@@ -19,7 +19,6 @@
     /* declaracao de prototipos de funcoes */
     extern t_stack *newStack();
     extern void push(t_stack *stack, void *dado, int tipoDado);
-    extern int popInt(t_stack *stack);
     extern char popChar(t_stack *stack);
     extern double popDouble(t_stack *stack);
     extern int isStackEmpty(t_stack *stack);

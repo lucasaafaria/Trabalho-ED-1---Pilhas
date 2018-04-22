@@ -19,10 +19,6 @@
         addEnd(queue->l, dado, tipoDado);
     }
     
-    int removeInt(t_queue *queue){
-        return removeFirstInt(queue->l);   
-    }  
-    
     char removeChar(t_queue *queue){
         return removeFirstChar(queue->l);
     }

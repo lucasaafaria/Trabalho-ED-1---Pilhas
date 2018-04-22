@@ -13,9 +13,8 @@
     #include <stdlib.h>
     
     /* definicao de constantes */
-    #define t_int 1
-    #define t_char 2
-    #define t_double 3
+    #define t_char 1
+    #define t_double 2
     
     /* definicao de tipos */
 
@@ -34,7 +33,6 @@
     extern void addStart(t_list *list, void *dado, int tipoDado);
     extern void addEnd(t_list *list, void *dado, int tipoDado);
     extern int isEmpty(t_list *list);
-    extern int removeFirstInt(t_list *list);
     extern char removeFirstChar(t_list *list);
     extern double removeFirstDouble(t_list *list);
     extern int getNextType(t_list *list);   

@@ -19,10 +19,6 @@ void addStart(t_list *list, void *dado, int tipoDado){
     t_element *elemento = (t_element*) malloc(sizeof(t_element));
     void *inserir;
     switch(tipoDado){
-        case t_int:
-            inserir = (int *) malloc(sizeof(int));
-            *(int *)inserir=*(int *)dado;
-            break;
         case t_char:
             inserir = (char *) malloc(sizeof(char));
             *(char *)inserir=*(char *)dado;
@@ -44,10 +40,6 @@ void addEnd(t_list *list, void *dado, int tipoDado){
     t_element *elemento = (t_element*) malloc(sizeof(t_element));
     void *inserir;
     switch(tipoDado){
-        case t_int:
-            inserir = (int *) malloc(sizeof(int));
-            *(int *)inserir=*(int *)dado;
-            break;
         case t_char:
             inserir = (char *) malloc(sizeof(char));
             *(char *)inserir=*(char *)dado;
@@ -72,22 +64,6 @@ int isEmpty(t_list *list){
     if(list->inicio == NULL)
         return 1;
     return 0;
-}
-
-int removeFirstInt(t_list *list){
-    int dado = -1;
-    t_element *remover = list->inicio;
-    if(isEmpty(list)){
-        return dado;
-    }
-    dado = *(int *)remover->dado;
-    if(list->fim == list->inicio){
-        list->fim == NULL;
-    }
-    list->inicio = remover->proximo;
-    free(remover->dado);
-    free(remover);
-    return dado;
 }
 
 char removeFirstChar(t_list *list){

@@ -15,9 +15,6 @@ double calculate(t_queue *queue){
         if(getNextQueueType(queue) == t_double){
             double dado = removeDouble(queue);
             push(stack, &dado, t_double);
-        } else if(getNextQueueType(queue) == t_int){
-            double dado = removeInt(queue);
-            push(stack, &dado, t_double);
         } else {
             char operacao = removeChar(queue);
             op1 = popDouble(stack);
