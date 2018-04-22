@@ -8,12 +8,6 @@
 
 #include "transform.h"
 
-int isLowerPrior(char * dado){
-	if(*dado == '+' || *dado == '-')
-		return 1;
-	return 0;
-}
-
 void parenthesisProcess(char * dado, t_stack * stack, t_queue * saida){
 	if(*dado == '(')
 		push(stack, dado, t_char);

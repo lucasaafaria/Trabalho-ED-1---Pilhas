@@ -11,10 +11,8 @@
 
 	/* Funções de comparação */
 	int isParenthesis(char * dado){
-		if((*dado) == '(')
-			return OPEN_PAR;
-		else if((*dado) == ')')
-			return CLOSE_PAR;
+		if((*dado) == '(' || (*dado) == ')')
+			return 1;
 		return 0;
 	}
 	
@@ -26,6 +24,12 @@
 	
 	int isOperator(char * dado){
 		if((*dado) == '+' || (*dado) == '-' || (*dado) == '*' || (*dado) == '/')
+			return 1;
+		return 0;
+	}
+
+	int isLowerPrior(char * dado){
+		if(*dado == '+' || *dado == '-')
 			return 1;
 		return 0;
 	}
@@ -52,31 +56,40 @@
 
 	/* Testes para validação da entrada */
 	int okTestsDouble(int lastType, char lastChar){
-		if(lastType == t_double || (lastChar == ')' && lastType == t_char))
+		if(lastType == t_double) /* Dois números seguidos na fila */
+			return 0;
+		if(lastChar == ')' && lastType == t_char) /* ')' seguido de número */
 			return 0;
 		return 1;
 	}
 
 	int okTestsChar(char dado, int lastType, char lastChar){
-		if(!isOperator(&dado) && !isParenthesis(&dado))
+		if(!isOperator(&dado) && !isParenthesis(&dado)) /* Caractere inválido */
 			return 0;
 		switch(dado){
 			case '(':
-				if(lastType == t_double || (lastChar == ')' && lastType == t_char))
+				if(lastType == t_double) /* número seguido de '(' */
+					return 0;
+				if(lastChar == ')' && lastType == t_char) /* ')' seguido de '(' */
 					return 0;
 				break;
 			case ')':
-				if(isOperator(&lastChar) && lastType == t_char)
+				if(isOperator(&lastChar) && lastType == t_char) /* operador seguido de ')' */
 					return 0;
 				break;
 			default:
-				if(lastType == -1 || (lastChar == '(' && lastType == t_char) || (isOperator(&lastChar) && lastType == t_char))
+				if(lastType == -1 && !isLowerPrior(&dado)) /* expressão começa com '*' ou '/' */
+					return 0;
+				if(lastChar == '(' && lastType == t_char && !isLowerPrior(&dado)) /* '(' seguido de '*' ou '/' */
+					return 0; 
+				if(isOperator(&lastChar) && lastType == t_char) /* dois operadores seguidos */
 					return 0;
 				break;
 		}
 		return 1;
 	}
 
+	/* Valida a expressão */
 	int validExpression(t_queue * queue, t_queue * validada){
 		t_stack * stack = newStack();
 		char lastChar = '\0', dadoChar;
@@ -85,33 +98,36 @@
 
 		while(!isEmptyQueue(queue)){
 			tipoDado = getNextQueueType(queue);
-			switch(tipoDado){
-				case t_double:
-					dadoDouble = removeDouble(queue);
-					if(!okTestsDouble(lastType, lastChar))
+			if(tipoDado == t_double){
+				dadoDouble = removeDouble(queue);
+				if(!okTestsDouble(lastType, lastChar))
+					return 0;
+				doubleCount++;
+				lastType = t_double;
+				add(validada, &dadoDouble, t_double);
+			}else{
+				dadoChar = removeChar(queue);
+				if(!okTestsChar(dadoChar, lastType, lastChar))
+					return 0;
+				if(dadoChar == '(')
+					push(stack, &dadoChar, t_char);
+				else if(dadoChar == ')'){
+					if(isStackEmpty(stack))
 						return 0;
-					doubleCount++;
-					lastType = t_double;
-					add(validada, &dadoDouble, t_double);
-					break;
-				case t_char:
-					dadoChar = removeChar(queue);
-					if(!okTestsChar(dadoChar, lastType, lastChar))
-						return 0;
-					if(dadoChar == '(')
-						push(stack, &dadoChar, t_char);
-					else if(dadoChar == ')'){
-						if(isStackEmpty(stack))
-							return 0;
-						if(popChar(stack) != '(')
-							return 0; 
+					if(popChar(stack) != '(')
+						return 0; 
+				}else if(isLowerPrior(&dadoChar)){
+					if((lastChar == '(' && lastType == t_char) || lastType == -1){
+						dadoDouble = 0;
+						doubleCount++;
+						add(validada, &dadoDouble, t_double);
 					}
-					if(isOperator(&dadoChar))
-						opCount++;
-					lastType = t_char;
-					lastChar = dadoChar;
-					add(validada, &dadoChar, t_char);
-					break;
+				}
+				if(isOperator(&dadoChar))
+					opCount++;
+				lastType = t_char;
+				lastChar = dadoChar;
+				add(validada, &dadoChar, t_char);
 			}
 		}
 		if(opCount >= doubleCount)

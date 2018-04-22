@@ -11,7 +11,6 @@
 
     #include "inputs.h"
 
-	extern int isLowerPrior(char * dado);
 	extern void parenthesisProcess(char * dado, t_stack * stack, t_queue * saida);
 	extern void operatorProcess(char * dado, t_stack * stack, t_queue * saida);
 	extern t_queue * transform(t_queue * queue);

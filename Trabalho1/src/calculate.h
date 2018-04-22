@@ -9,8 +9,7 @@
 #ifndef _CALCULATE_H_
 #define _CALCULATE_H_
     
-    #include "stack.h"
-    #include "queue.h"
+    #include "transform.h"
     
     /* declaracao de prototipos de funcoes */
     extern double calculate(t_queue *queue);
