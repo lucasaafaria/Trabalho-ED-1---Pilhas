@@ -46,23 +46,21 @@ t_queue * transform(t_queue * queue){
 
 	while(!isEmptyQueue(queue)){
 		tipoDado = getNextQueueType(queue);
-		switch(tipoDado){
-			case t_double:
-				dadoDouble = removeDouble(queue);
-				add(saida, &dadoDouble, t_double);
-				break;
-			case t_char:
-				dadoChar = removeChar(queue);
-				if(isParenthesis(&dadoChar))
-					parenthesisProcess(&dadoChar, stack, saida);
-				else
-					operatorProcess(&dadoChar, stack, saida);
-				break;
+		if(tipoDado == t_double){
+			dadoDouble = removeDouble(queue);
+			add(saida, &dadoDouble, t_double);
+		}else{
+			dadoChar = removeChar(queue);
+			if(isParenthesis(&dadoChar))
+				parenthesisProcess(&dadoChar, stack, saida);
+			else
+				operatorProcess(&dadoChar, stack, saida);
 		}
 	}
 	while(!isStackEmpty(stack)){
 		dadoChar = popChar(stack);
 		add(saida, &dadoChar, t_char);
 	}
+	free(queue);
 	return saida;
 }

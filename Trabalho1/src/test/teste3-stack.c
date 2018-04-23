@@ -3,19 +3,19 @@
 #include <stdlib.h>
 
 void inserir(t_stack *stack){
-    int x=0,y=1,z=2;
-    push(stack, &x, t_int);
-    push(stack, &y, t_int);
-    push(stack, &z, t_int);  
+    double x=0,y=1,z=2;
+    push(stack, &x, t_double);
+    push(stack, &y, t_double);
+    push(stack, &z, t_double);  
 }
 
 int main(){
     t_stack *stack = newStack();
     inserir(stack);
-    int saindo = popInt(stack);
+    double saindo = popDouble(stack);
     while(saindo != -1){
-        printf("%d\n", saindo);
-        saindo = popInt(stack);
+        printf("%lf\n", saindo);
+        saindo = popDouble(stack);
     }
     return 0;
 }

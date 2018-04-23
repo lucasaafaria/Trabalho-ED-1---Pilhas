@@ -4,14 +4,14 @@
 
 int main(){
     t_list *list = newList();
-    int x=0,y=1,z=2;
-    addStart(list, &x, t_int);
-    addStart(list, &y, t_int);
-    addStart(list, &z, t_int);
-    int saindo = removeFirstInt(list);
+    double x=0,y=1,z=2;
+    addStart(list, &x, t_double);
+    addStart(list, &y, t_double);
+    addStart(list, &z, t_double);
+    double saindo = removeFirstDouble(list);
     while(saindo != -1){
-        printf("%d\n", saindo);
-        saindo = removeFirstInt(list);
+        printf("%lf\n", saindo);
+        saindo = removeFirstDouble(list);
     }
     return 0;
 }

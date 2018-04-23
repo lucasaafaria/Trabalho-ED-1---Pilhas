@@ -4,14 +4,14 @@
 
 int main(){
     t_stack *stack = newStack();
-    int x=0,y=1,z=2;
-    push(stack, &x, t_int);
-    push(stack, &y, t_int);
-    push(stack, &z, t_int);
-    int saindo = popInt(stack);
+    double x=0,y=1,z=2;
+    push(stack, &x, t_double);
+    push(stack, &y, t_double);
+    push(stack, &z, t_double);
+    double saindo = popDouble(stack);
     while(saindo != -1){
-        printf("%d\n", saindo);
-        saindo = popInt(stack);
+        printf("%lf\n", saindo);
+        saindo = popDouble(stack);
     }
     return 0;
 }
