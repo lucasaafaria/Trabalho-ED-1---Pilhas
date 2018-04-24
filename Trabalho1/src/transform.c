@@ -63,4 +63,4 @@ t_queue * transform(t_queue * queue){
 	}
 	free(queue);
 	return saida;
-}
+}.
