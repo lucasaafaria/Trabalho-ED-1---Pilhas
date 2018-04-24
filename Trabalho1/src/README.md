@@ -5,6 +5,6 @@
     ./build $1
   substituindo $1 pelo nome do arquivo que deseja-se compilar.
   
-  Para executar o programa com a interface gráfica, basta rodar o comando:
+  Para executar o programa com a interface gráfica, basta compilar o arquivo main.c e em seguida rodar o comando:
   
     ./Calculadora
