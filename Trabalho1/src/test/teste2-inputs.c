@@ -19,7 +19,7 @@ void imprimir(t_list * l){
 
 int main(){
 	t_queue * queue = newQueue();
-
+    printf("Digite uma expressão");
 	getExpression(queue);
 	imprimir(queue->l);
 

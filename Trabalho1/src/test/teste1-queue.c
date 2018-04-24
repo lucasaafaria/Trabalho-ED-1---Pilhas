@@ -4,12 +4,12 @@
 
 int main(){
     t_queue *queue = newQueue();
-    double x=0,y=1,z=2;
+    double x=3,y=1,z=2;
     add(queue, &x, t_double);
     add(queue, &y, t_double);
     add(queue, &z, t_double);
     double saindo = removeDouble(queue);
-    while(saindo != -1){
+    while(saindo != 0){
         printf("%lf\n", saindo);
         saindo = removeDouble(queue);
     }

@@ -1,3 +1,4 @@
+mkdir -p lib
 gcc -o lib/list.o -c list.c
 gcc -o lib/stack.o -c stack.c
 gcc -o lib/queue.o -c queue.c
