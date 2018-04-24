@@ -8,3 +8,8 @@
   Para executar o programa com a interface gráfica, basta compilar o arquivo main.c e em seguida rodar o comando:
   
     ./Calculadora
+    
+    
+  Para executar o programa pelo Terminal, sem interface gráfica, basta utilizar o seguinte comando:
+  
+    ./a.out
