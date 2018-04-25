@@ -10,6 +10,7 @@
 int main(){
     t_queue * queue = newQueue();
     t_queue * validada = newQueue();
+    
 	getExpression(queue);
 	if(!validExpression(queue, validada)){
 		printf("Expressão inválida\n");

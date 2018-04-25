@@ -25,14 +25,22 @@ void operatorProcess(char * dado, t_stack * stack, t_queue * saida){
 
 	while(!isStackEmpty(stack) && isLowerPrior(&popped)){
 		popped = popChar(stack);
-		if(!isLowerPrior(&popped) && !isParenthesis(&popped))
+		if(!isLowerPrior(&popped) && !isParenthesis(&popped)){
 			add(saida, &popped, t_char);
+			while(!isStackEmpty(stack)){
+				popped = popChar(stack);
+				if(isParenthesis(&popped))
+					break;
+				add(saida, &popped, t_char);
+			}
+		}
 		else if((isLowerPrior(&popped) && !isLowerPrior(dado)) || isParenthesis(&popped)){
 			push(stack, &popped, t_char);
 			break;
 		}
-		else if(isLowerPrior(&popped) && isLowerPrior(dado))
+		else if(isLowerPrior(&popped) && isLowerPrior(dado)){
 			add(saida, &popped, t_char);
+		}
 	}
 	push(stack, dado, t_char);
 }
