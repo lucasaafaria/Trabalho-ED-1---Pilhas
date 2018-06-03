@@ -116,7 +116,7 @@
 						return 0;
 					if(popChar(stack) != '(')
 						return 0; 
-				}else if(isLowerPrior(&dadoChar)){
+				}else if(isLowerPrior(&dadoChar)){ /* Pra adicionar um 0 em casos especiais */
 					if((lastChar == '(' && lastType == t_char) || lastType == -1){
 						dadoDouble = 0;
 						doubleCount++;
