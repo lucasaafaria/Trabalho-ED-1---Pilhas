@@ -69,9 +69,9 @@ void decodificaLista(t_lista * tradutor){
 		lido = fscanf(mensagem, "%s ", codigo);
 		if(lido != -1){
 			if(strcmp(codigo, "/") != 0)
-				printf("%c", procura(codigo, tradutor));
+				putchar(procura(codigo, tradutor));
 			else
-				printf(" ");
+				putchar(' ');
 		}
 	}
 	fclose(mensagem);
@@ -157,7 +157,7 @@ int main(){
     }
     fseek(mensagem, 0, SEEK_SET);*/
     while(fscanf(mensagem, "%s ", codigo) != -1){
-        printf("%c", traduzir(raiz, codigo));
+        putchar(traduzir(raiz, codigo));
     }
     fclose(mensagem);
     clock_gettime(CLOCK_REALTIME, &requestEnd);
