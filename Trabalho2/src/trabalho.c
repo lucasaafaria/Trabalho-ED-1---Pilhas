@@ -63,7 +63,7 @@ char procura(char * codigo, t_lista * l){
 void decodificaLista(t_lista * tradutor){
 	int lido = 1;
     char codigo[10];
-	FILE * mensagem = fopen("mensagemLonga.txt", "r");
+	FILE * mensagem = fopen("mensagem.txt", "r");
 
 	while(lido != -1){
 		lido = fscanf(mensagem, "%s ", codigo);
@@ -148,7 +148,7 @@ int main(){
     t_no *raiz = montarArvore();
     struct timespec requestStart, requestEnd;
     clock_gettime(CLOCK_REALTIME, &requestStart);
-    FILE *mensagem = fopen( "./mensagemLonga.txt", "r" );
+    FILE *mensagem = fopen( "./mensagem.txt", "r" );
     char codigo[9],a;/*
     a=fgetc(mensagem);
     while(!feof(mensagem)){
