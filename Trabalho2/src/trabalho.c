@@ -24,6 +24,13 @@ t_lista * novaLista(){
     return l;
 }
 
+typedef struct no{
+    char caractere;
+    struct no* ponto;
+    struct no* traco;
+} t_no;
+
+
 void insereInicio(t_lista *lista, char simbolo, char * codigo){
     t_elemento * elemento = (t_elemento*) malloc(sizeof(t_elemento));
     elemento->simbolo = simbolo;
@@ -77,32 +84,11 @@ void decodificaLista(t_lista * tradutor){
 	fclose(mensagem);
 }
 
-typedef struct no{
-    char caractere;
-    struct no* ponto;
-    struct no* traco;
-} t_no;
-
-void inserirNo(t_no* raiz, char *codigo, char letra);
-
 t_no* criarNo(char dado){
     t_no* novo = (t_no*) malloc(sizeof(t_no));
     novo->caractere = dado;
     return novo;
 }
-
-t_no* montarArvore(){
-    t_no *raiz = criarNo(' ');
-    FILE *arvore = fopen( "./morse.txt", "r" );
-    char codigo[9], letra;
-    while(!feof(arvore)){
-        fscanf(arvore, "%c %s\n", &letra, codigo);
-        inserirNo(raiz, codigo, letra);
-    }
-    fclose(arvore);
-    return raiz;
-}
-
 void inserirNo(t_no* raiz, char *codigo, char letra){
     if(codigo[1]=='\0'){
         if(codigo[0]=='.'){
@@ -132,6 +118,18 @@ void inserirNo(t_no* raiz, char *codigo, char letra){
     }
 }
 
+t_no* montarArvore(){
+    t_no *raiz = criarNo(' ');
+    FILE *arvore = fopen( "./morse.txt", "r" );
+    char codigo[9], letra;
+    while(!feof(arvore)){
+        fscanf(arvore, "%c %s\n", &letra, codigo);
+        inserirNo(raiz, codigo, letra);
+    }
+    fclose(arvore);
+    return raiz;
+}
+
 char traduzir(t_no *raiz, char *codigo){
     if(*codigo == '\0')
         return raiz->caractere;
@@ -149,13 +147,17 @@ int main(){
     struct timespec requestStart, requestEnd;
     clock_gettime(CLOCK_REALTIME, &requestStart);
     FILE *mensagem = fopen( "./mensagem.txt", "r" );
+<<<<<<< HEAD
     char codigo[9],a;/*
+=======
+    char codigo[9],a;
+>>>>>>> 385f1538f3784a4bf0b0983f0627491c281b0ef1
     a=fgetc(mensagem);
     while(!feof(mensagem)){
         putchar(a);
         a=fgetc(mensagem);
     }
-    fseek(mensagem, 0, SEEK_SET);*/
+    fseek(mensagem, 0, SEEK_SET);
     while(fscanf(mensagem, "%s ", codigo) != -1){
         putchar(traduzir(raiz, codigo));
     }
